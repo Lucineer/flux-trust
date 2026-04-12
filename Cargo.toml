@@ -2,3 +2,7 @@
 name = "flux-trust"
 version = "0.1.0"
 edition = "2021"
+description = "Trust scoring with Bayesian updates and decay — how agents decide who to believe"
+
+[dependencies]
+rand = "0.8"
