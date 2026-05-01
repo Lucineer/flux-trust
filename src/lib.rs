@@ -20,8 +20,8 @@ impl TrustTable {
     fn level(s: f64) -> TrustLevel { if s < 0.2 { TrustLevel::Unknown } else if s < 0.4 { TrustLevel::Suspicious } else if s < 0.6 { TrustLevel::Neutral } else if s < 0.8 { TrustLevel::Trusted } else { TrustLevel::Verified } }
     pub fn level_of(&self, agent: u32) -> TrustLevel { self.scores.iter().find(|e| e.agent == agent).map(|e| e.level.clone()).unwrap_or(Self::level(self.default)) }
     pub fn is_trusted(&self, agent: u32, threshold: f64) -> bool { self.get(agent) >= threshold }
-    pub fn most_trusted(&self, n: usize) -> Vec<&TrustEntry> { let mut v: Vec<&TrustEntry> = self.scores.iter().collect(); v.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap()); v.truncate(n) }
-    pub fn least_trusted(&self, n: usize) -> Vec<&TrustEntry> { let mut v: Vec<&TrustEntry> = self.scores.iter().collect(); v.sort_by(|a, b| a.score.partial_cmp(&b.score).unwrap()); v.truncate(n) }
+    pub fn most_trusted(&self, n: usize) -> Vec<&TrustEntry> { let mut v: Vec<&TrustEntry> = self.scores.iter().collect(); v.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap()); v.truncate(n); v }
+    pub fn least_trusted(&self, n: usize) -> Vec<&TrustEntry> { let mut v: Vec<&TrustEntry> = self.scores.iter().collect(); v.sort_by(|a, b| a.score.partial_cmp(&b.score).unwrap()); v.truncate(n); v }
     pub fn revoke(&mut self, agent: u32) { self.set(agent, 0.0); }
     pub fn restore(&mut self, agent: u32, score: f64) { self.set(agent, score); }
     pub fn agent_count(&self) -> usize { self.scores.len() }
