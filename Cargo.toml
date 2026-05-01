@@ -2,6 +2,9 @@
 name = "flux-trust"
 version = "0.1.0"
 edition = "2021"
+homepage = "https://github.com/Lucineer"
+repository = "https://github.com/Lucineer/flux-trust"
+license = "MIT OR Apache-2.0"
 description = "Trust scoring with Bayesian updates and decay — how agents decide who to believe"
 
 [dependencies]
